@@ -1,6 +1,5 @@
 # Pipewire stub
-small pipewire stub for telegram-desktop
-which allows use it without real pipewire
+small pipewire stub which allows use some software without real pipewire
 
 ## Tested with:
 telegram-desktop

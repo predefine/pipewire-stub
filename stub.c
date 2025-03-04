@@ -1,6 +1,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <sys/time.h>
 
 #define NULL_ {return NULL;}
 
@@ -24,6 +25,15 @@ void pw_thread_loop_lock(void *loop) {}
 void pw_thread_loop_unlock(void *loop) {}
 void pw_thread_loop_stop(void *loop) {}
 int pw_thread_loop_timed_wait(void *loop, int wait_max_sec) {
+  return -1;
+}
+int pw_thread_loop_timed_wait_full(void *loop, const struct timespec *abstime) {
+  return -1;
+}
+int pw_thread_loop_get_time(void *loop,
+  struct timespec * abstime,
+  int64_t timeout)
+{
   return -1;
 }
 
@@ -51,14 +61,38 @@ int pw_stream_set_active(void *stream, bool active) {
   return -1;
 }
 
+int pw_stream_set_control(
+  void *stream,
+  uint32_t id,
+  uint32_t n_values,
+	float *values, ...)
+{
+  return -1;
+}
+
+int pw_stream_update_properties(void *stream, const void *dict) {
+  return -1;
+}
+
 void *pw_stream_dequeue_buffer(void *stream) NULL_
 int pw_stream_queue_buffer(void *stream, void *buffer)
 {
   return -1;
 }
 
+int pw_stream_flush(void *stream, bool drain) {
+  return -1;
+}
+
 const char *pw_stream_state_as_string(int state) {
   return "error";
+}
+
+uint64_t pw_stream_get_nsec(void *stream) {
+  return 0;
+}
+int pw_stream_get_time_n(void *stream, void *time, size_t size) {
+  return -1;
 }
 
 int pw_stream_connect(void *stream,
@@ -79,8 +113,12 @@ void *pw_loop_new(const void *props) NULL_
 void pw_loop_destroy(void *loop) {}
 
 // properties
+void *pw_properties_new(const char *key, ...) NULL_
 void *pw_properties_new_string(const char *object) NULL_
 void *pw_properties_new_dict(const void *dict) NULL_
+int pw_properties_setf(void *properties, const char *key, char *format, ...) {
+  return -1;
+}
 void pw_properties_free(void *properties) {}
 
 // context
@@ -100,6 +138,7 @@ void *pw_context_connect_fd(void *context,
 	size_t user_data_size) NULL_
 
 // core
+void *pw_core_get_context(void *core) NULL_
 int pw_core_disconnect(void *core) { return 0; }
 
 // proxy

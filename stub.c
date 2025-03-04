@@ -6,6 +6,7 @@
 
 // pipewire
 void pw_init(int *argc, char **argv[]) {}
+void pw_deinit(void) {}
 const char* pw_get_library_version(void) {
   return "0.0.0";
 }
@@ -22,6 +23,9 @@ void pw_thread_loop_destroy(struct pw_thread_loop *loop) {}
 void pw_thread_loop_lock(struct pw_thread_loop *loop) {}
 void pw_thread_loop_unlock(struct pw_thread_loop *loop) {}
 void pw_thread_loop_stop(struct pw_thread_loop *loop) {}
+int pw_thread_loop_timed_wait(struct pw_thread_loop *loop, int wait_max_sec) {
+  return -1;
+}
 
 // stream
 struct pw_stream *pw_stream_new(
@@ -40,6 +44,10 @@ int pw_stream_update_params(struct pw_stream *stream,
 	const struct spa_pod **params,
 	uint32_t n_params)
 {
+  return -1;
+}
+
+int pw_stream_set_active(struct pw_stream *stream, bool active) {
   return -1;
 }
 
@@ -66,8 +74,14 @@ int pw_stream_disconnect(struct pw_stream *stream) {
   return -1;
 }
 
+// loop
+struct pw_loop * pw_loop_new(const struct spa_dict *props) NULL_
+void pw_loop_destroy(struct pw_loop *loop) {}
+
 // properties
 struct pw_properties *pw_properties_new_string(const char *object) NULL_
+struct pw_properties * pw_properties_new_dict(const struct spa_dict *dict) NULL_
+void pw_properties_free(struct pw_properties *properties) {}
 
 // context
 struct pw_context *pw_context_new(

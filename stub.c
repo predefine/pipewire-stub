@@ -1,6 +1,6 @@
-#include <pipewire/core.h>
-#include <pipewire/thread-loop.h>
-#include <pipewire/core.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
 
 #define NULL_ {return NULL;}
 
@@ -12,47 +12,47 @@ const char* pw_get_library_version(void) {
 }
 
 // thread-loop
-struct pw_thread_loop * pw_thread_loop_new(const char *name,const struct spa_dict *props) NULL_
-int pw_thread_loop_start(struct pw_thread_loop* loop) {
+void *pw_thread_loop_new(const char *name, const void *props) NULL_
+int pw_thread_loop_start(void* loop) {
   return -1;
 }
-struct pw_loop * pw_thread_loop_get_loop(struct pw_thread_loop *loop) NULL_
-void pw_thread_loop_signal(struct pw_thread_loop *loop, bool wait_for_accept) {}
-void pw_thread_loop_wait(struct pw_thread_loop *loop) {}
-void pw_thread_loop_destroy(struct pw_thread_loop *loop) {}
-void pw_thread_loop_lock(struct pw_thread_loop *loop) {}
-void pw_thread_loop_unlock(struct pw_thread_loop *loop) {}
-void pw_thread_loop_stop(struct pw_thread_loop *loop) {}
-int pw_thread_loop_timed_wait(struct pw_thread_loop *loop, int wait_max_sec) {
+void *pw_thread_loop_get_loop(void *loop) NULL_
+void pw_thread_loop_signal(void *loop, bool wait_for_accept) {}
+void pw_thread_loop_wait(void *loop) {}
+void pw_thread_loop_destroy(void *loop) {}
+void pw_thread_loop_lock(void *loop) {}
+void pw_thread_loop_unlock(void *loop) {}
+void pw_thread_loop_stop(void *loop) {}
+int pw_thread_loop_timed_wait(void *loop, int wait_max_sec) {
   return -1;
 }
 
 // stream
-struct pw_stream *pw_stream_new(
-  struct pw_core *core,
+void *pw_stream_new(
+  void *core,
   const char *name,
-  struct pw_properties *props) NULL_
+  void *props) NULL_
 
-void pw_stream_destroy(struct pw_stream *stream) {}
+void pw_stream_destroy(void *stream) {}
 
-void pw_stream_add_listener(struct pw_stream *stream,
-	struct spa_hook *listener,
+void pw_stream_add_listener(void *stream,
+	void *listener,
 	const void *events,
 	void *data) {}
 
-int pw_stream_update_params(struct pw_stream *stream,
-	const struct spa_pod **params,
+int pw_stream_update_params(void *stream,
+	const void **params,
 	uint32_t n_params)
 {
   return -1;
 }
 
-int pw_stream_set_active(struct pw_stream *stream, bool active) {
+int pw_stream_set_active(void *stream, bool active) {
   return -1;
 }
 
-struct pw_buffer * pw_stream_dequeue_buffer(struct pw_stream *stream) NULL_
-int pw_stream_queue_buffer(struct pw_stream *stream, struct pw_buffer *buffer)
+void *pw_stream_dequeue_buffer(void *stream) NULL_
+int pw_stream_queue_buffer(void *stream, void *buffer)
 {
   return -1;
 }
@@ -61,46 +61,46 @@ const char *pw_stream_state_as_string(int state) {
   return "error";
 }
 
-int pw_stream_connect(struct pw_stream *stream,
+int pw_stream_connect(void *stream,
   int direction,
   uint32_t target_id,
   int flags,
-  const struct spa_pod **params,
+  const void **params,
   uint32_t n_params)
 {
   return -1;
 }
-int pw_stream_disconnect(struct pw_stream *stream) {
+int pw_stream_disconnect(void *stream) {
   return -1;
 }
 
 // loop
-struct pw_loop * pw_loop_new(const struct spa_dict *props) NULL_
-void pw_loop_destroy(struct pw_loop *loop) {}
+void *pw_loop_new(const void *props) NULL_
+void pw_loop_destroy(void *loop) {}
 
 // properties
-struct pw_properties *pw_properties_new_string(const char *object) NULL_
-struct pw_properties * pw_properties_new_dict(const struct spa_dict *dict) NULL_
-void pw_properties_free(struct pw_properties *properties) {}
+void *pw_properties_new_string(const char *object) NULL_
+void *pw_properties_new_dict(const void *dict) NULL_
+void pw_properties_free(void *properties) {}
 
 // context
-struct pw_context *pw_context_new(
-  struct pw_loop *main_loop,
-  struct pw_properties *properties,
+void *pw_context_new(
+  void *main_loop,
+  void *properties,
   size_t user_data_size) NULL_
-void pw_context_destroy(struct pw_context *context) {}
-struct pw_core *pw_context_connect(
-  struct pw_context *context,
-  struct pw_properties *properties,
+void pw_context_destroy(void *context) {}
+void *pw_context_connect(
+  void *context,
+  void *properties,
   size_t user_data_size) NULL_
 
-struct pw_core * pw_context_connect_fd(struct pw_context *context,
+void *pw_context_connect_fd(void *context,
 	int fd,
-	struct pw_properties *properties,
+	void *properties,
 	size_t user_data_size) NULL_
 
 // core
-int pw_core_disconnect(struct pw_core *core) { return 0; }
+int pw_core_disconnect(void *core) { return 0; }
 
 // proxy
-void pw_proxy_destroy(struct pw_proxy *proxy) {}
+void pw_proxy_destroy(void *proxy) {}

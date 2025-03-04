@@ -1,0 +1,4 @@
+(= flags "-I/usr/include/spa-0.2 -I/usr/include/pipewire-0.3")
+(build ld (list
+  (build cc "stub.c" "stub.o" flags)
+) "libpipewire-0.3.so.0" "-shared")

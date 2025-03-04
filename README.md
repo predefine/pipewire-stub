@@ -4,5 +4,7 @@ which allows use it without real pipewire
 
 ## Tested with:
 telegram-desktop
+
 kpipewire6
+
 mpv

@@ -7,3 +7,5 @@ telegram-desktop
 kpipewire6
 
 mpv
+
+qpwgraph
